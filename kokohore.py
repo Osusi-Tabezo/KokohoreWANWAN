@@ -3,8 +3,6 @@ import json
 
 pyxel.init(128, 128, title="Kokohore WANWAN")
 pyxel.load("kokohore.pyxres")  # イメージバンク0にタイルマップ
-# pyxel.image(2).load(0, 0, "title.png")  # イメージバンク2に画像ファイル
-# pyxel.colors[3] = 0x19C5FA  # 背景塗りつぶしに使う薄い青色
 # pyxel.mouse(True)
 
 # 定数
@@ -195,13 +193,13 @@ def chkwall(cx, cy):
 def moveplayer():
     global scene, scroll_x, scroll_y, x, y, u, v, dx, dy, pldir, tmr, ply_ani, is_animating, animation_timer, kunkun_limit
     # 操作判定
-    if pyxel.btn(pyxel.KEY_LEFT):
+    if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
         # -2まで徐々に変化
         if -2 < dx:
             dx = dx - 1
         pldir = -1
         ply_ani += 1
-    elif pyxel.btn(pyxel.KEY_RIGHT):
+    elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT):
         # 2まで徐々に変化
         if dx < 2:
             dx = dx + 1
@@ -211,19 +209,29 @@ def moveplayer():
         # dx = int(dx * 0.7)  # 急には止まれない
         dx = 0  # 今回は慣性無し
 
-    if pyxel.btn(pyxel.KEY_UP):
+    if pyxel.btn(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP):
         # -2まで徐々に変化
         if -2 < dy:
             dy = dy - 1
         # 横も押されているときにアニメーション速度が2倍になる対策
-        if not (pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_RIGHT)):
+        if not (
+            pyxel.btn(pyxel.KEY_LEFT)
+            or pyxel.btn(pyxel.KEY_RIGHT)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
+        ):
             ply_ani += 1
-    elif pyxel.btn(pyxel.KEY_DOWN):
+    elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN):
         # 2まで徐々に変化
         if dy < 2:
             dy = dy + 1
         # 横も押されているときにアニメーション速度が2倍になる対策
-        if not (pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_RIGHT)):
+        if not (
+            pyxel.btn(pyxel.KEY_LEFT)
+            or pyxel.btn(pyxel.KEY_RIGHT)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
+        ):
             ply_ani += 1
     else:
         # dy = int(dy * 0.7)  # 急には止まれない
@@ -245,7 +253,11 @@ def moveplayer():
         y += dy
 
     # くんくん
-    if pyxel.btnp(pyxel.KEY_SPACE) and kunkun_limit > 0 and is_animating == 0:
+    if (
+        (pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A))
+        and kunkun_limit > 0
+        and is_animating == 0
+    ):
 
         ply_ani = 0
         pyxel.play(3, 0)
@@ -253,7 +265,11 @@ def moveplayer():
         kunkun_limit -= 1
 
     # 掘る
-    if pyxel.btnp(pyxel.KEY_Z) and dig_limit > 0 and is_animating == 0:
+    if (
+        (pyxel.btnp(pyxel.KEY_Z) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B))
+        and dig_limit > 0
+        and is_animating == 0
+    ):
 
         ply_ani = 0
         pyxel.play(3, 1)
@@ -347,7 +363,7 @@ def update():
         if tmr == 1:
             initgame()
 
-        if pyxel.btnp(pyxel.KEY_SPACE):
+        if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
             scene = SNO_STAGESET
             ply_ani = 0
             tmr = 0
@@ -395,7 +411,7 @@ def update():
                     pyxel.stop()
                     pyxel.play(3, 3)
 
-            if pyxel.btnp(pyxel.KEY_SPACE):
+            if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
                 scene = SNO_TITLE
                 pyxel.stop()
                 ply_ani = 0
@@ -426,7 +442,7 @@ def update():
         if tmr == 1:
             pyxel.playm(0)
 
-        if pyxel.btnp(pyxel.KEY_SPACE):
+        if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
             scene = SNO_TITLE
             pyxel.stop()
             ply_ani = 0
