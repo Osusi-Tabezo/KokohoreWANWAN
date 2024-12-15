@@ -193,13 +193,13 @@ def chkwall(cx, cy):
 def moveplayer():
     global scene, scroll_x, scroll_y, x, y, u, v, dx, dy, pldir, tmr, ply_ani, is_animating, animation_timer, kunkun_limit
     # 操作判定
-    if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
+    if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT, 1, 1):
         # -2まで徐々に変化
         if -2 < dx:
             dx = dx - 1
         pldir = -1
         ply_ani += 1
-    elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT):
+    elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT):
         # 2まで徐々に変化
         if dx < 2:
             dx = dx + 1
@@ -209,7 +209,7 @@ def moveplayer():
         # dx = int(dx * 0.7)  # 急には止まれない
         dx = 0  # 今回は慣性無し
 
-    if pyxel.btn(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP):
+    if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_UP):
         # -2まで徐々に変化
         if -2 < dy:
             dy = dy - 1
@@ -217,11 +217,11 @@ def moveplayer():
         if not (
             pyxel.btn(pyxel.KEY_LEFT)
             or pyxel.btn(pyxel.KEY_RIGHT)
-            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
-            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
         ):
             ply_ani += 1
-    elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN):
+    elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN):
         # 2まで徐々に変化
         if dy < 2:
             dy = dy + 1
@@ -229,8 +229,8 @@ def moveplayer():
         if not (
             pyxel.btn(pyxel.KEY_LEFT)
             or pyxel.btn(pyxel.KEY_RIGHT)
-            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
-            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)
         ):
             ply_ani += 1
     else:
