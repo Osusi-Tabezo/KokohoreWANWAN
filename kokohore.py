@@ -193,7 +193,7 @@ def chkwall(cx, cy):
 def moveplayer():
     global scene, scroll_x, scroll_y, x, y, u, v, dx, dy, pldir, tmr, ply_ani, is_animating, animation_timer, kunkun_limit
     # 操作判定
-    if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
+    if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT,1,1):
         # -2まで徐々に変化
         if -2 < dx:
             dx = dx - 1
