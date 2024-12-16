@@ -411,11 +411,11 @@ def update():
                     pyxel.stop()
                     pyxel.play(3, 3)
 
-            if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
-                scene = SNO_TITLE
-                pyxel.stop()
-                ply_ani = 0
-                tmr = 0
+                if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
+                   scene = SNO_TITLE
+                   pyxel.stop()
+                   ply_ani = 0
+                   tmr = 0
 
         if is_animating != 0:
             ply_ani += 1
