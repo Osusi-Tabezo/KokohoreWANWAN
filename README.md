@@ -1,5 +1,5 @@
 # KokohoreWANWAN
-![readme](https://github.com/user-attachments/assets/2b6613b2-59ff-4e18-9cc4-1a0acc37b2a1)
+![readme_ver2](https://github.com/user-attachments/assets/74d3857a-8de2-4a9d-a7ca-42ab2049c610)
 
 起動はこちらから→
 https://osusi-tabezo.github.io/KokohoreWANWAN/
